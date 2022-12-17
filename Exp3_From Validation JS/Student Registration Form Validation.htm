@@ -1,0 +1,310 @@
+<!--Code done by: Abhijit Lalasaheb Zende-->
+<!--If you like my work then please give us a star on GitHub -->
+<!--For complete explanation visit my GitHub profile-->
+
+<!--Exp.3: Write a program demonstrating JavaScript functions and different validations-->
+<!--Problem Statement: Write a program demonstrating JavaScript functions and different validations-->
+
+<!DOCTYPE html>					<!-- Basics of HTML: https://www.w3schools.com/html/html_basic.asp-->
+<html lang="en">
+<html>
+
+<head>
+
+	<meta charset="UTF-8">		<!--https://www.w3schools.com/tags/tag_meta.asp-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0">  <!--To make page dynamic-->
+
+	<meta name="description" content="Website for student registration form">
+	<meta name="keywords" content="html, from, student registration form">
+	<meta name="robots" content="INDEX, FOLLOW">
+
+	<title>Registration form</title>
+
+	<style>
+		/* Internal or Embedded CSS */
+		span.invaliderror			/*To color the error to red*/
+		{
+			/* . operator is used for class selector */
+			/* # operator is used for id selector */
+			color: red;
+		}
+	</style>
+
+</head>
+
+<body>
+	<form method="post" enctype="multipart/form-data" onsubmit="return validation()" target="_self" action="sub.php">
+		<!-- method = "post" enctype = "multipart/form-data" is used when uploading file on browser over internet-->
+		<!-- This makes flow of uploading data efficient-->
+		<fieldset>			<!--Designing simple form: https://youtu.be/QnK9QWkDiF8-->
+			<legend style="font-size:2vw;"><b>Student registration form</b></legend>
+			<table width="900px" cellspacing="5">		<!--Table tag: https://youtu.be/8dE4hXi5etE-->
+				<tr>
+					<td>
+						<label for="fn">First name:* </label>
+					</td>
+					<td>
+						<input type="text" id="fn" name="fn" required="" placeholder="Only Uppercase letters allowed"
+							maxlength="20" autofocus>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="ufn" class="invaliderror"></span>  <!--id: To show error class: in red color-->
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="ln">Last name:* </label>
+					</td>
+					<td>
+						<input type="text" id="ln" name="ln" required="" placeholder="Only Uppercase letters allowed"
+							maxlength="20">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uln" class="invaliderror"></span>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="db">DOB: </label>
+					</td>
+					<td>
+						<input id="db" type='date' min='1998-01-01' max='2022-10-19'>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="G">Gender: </label>
+					</td>
+					<td>
+						<label>Male</label>
+						<input type="radio" id="G" name="g" value="male">
+						<label>Female </label>
+						<input type="radio" id="G" name="g" value="female">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="Email">Email:* </label>
+					</td>
+					<td>
+						<input type="email" id="Email" name="em" required="" placeholder="Enter your primary email id"
+							maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uEmail" class="invaliderror"></span>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="mno">Mobile no:* </label>
+					</td>
+					<td>
+						<input type="number" id="mno" name="mno" required="" placeholder="Enter your mobile number"
+							step="1" maxlength="10">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="umno" class="invaliderror"></span>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="clg">College: </label>
+					</td>
+					<td>
+						<input type="text" id="clg" name="clg" value="TKIET" readonly>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="Dept">Department:* </label>
+					</td>
+					<td>
+						<select required="">
+							<optgroup label="TKIET">
+								<option value=tCSE>CSE
+								<option>
+								<option value=tMech>Mechanical
+								<option>
+								<option value=tENTC>ENTC
+								<option>
+								<option value=tCIVIL>CIVIL
+								<option>
+								<option value=tCHEM>CHEMICAL
+								<option>
+							</optgroup>
+							<optgroup label="TKIET Polytechnic">
+								<option value=iCSE>CSE
+								<option>
+								<option value=iMech>Mechanical
+								<option>
+								<option value=iENTC>ENTC
+								<option>
+								<option value=iCIVIL>CIVIL
+								<option>
+								<option value=iCHEM>CHEMICAL
+								<option>
+							</optgroup>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="GRN">GRN:* </label>
+					</td>
+					<td>
+						<input type="number" id="GRN" name="grn" required="" placeholder="Enter your GRN"
+							min="1000000000" max="9999999999">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uGRN" class="invaliderror"></span>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="PL">Programming languages: </label>
+					</td>
+					<td>
+						<label for="Java">Java</label>
+						<input type="checkbox" id="Java" name="pl" value="java">
+
+						<label for="C">C</label>
+						<input type="checkbox" id="C" name="pl" value="C">
+
+						<label for="C++">C++</label>
+						<input type="checkbox" id="C++" name="pl" value="C++">
+
+						<label for="C#">C#</label>
+						<input type="checkbox" id="C#" name="pl" value="C#">
+
+						<label for="Py">Python</label>
+						<input type="checkbox" id="Py" name="pl" value="Python">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="addr">Address: </label>
+					</td>
+					<td>
+						<textarea id="addr" name="addr" rows="10" cols="40" placeholder="Enter your addresss"
+							maxlength="250"></textarea>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="img">ID card* </label>
+					</td>
+					<td>
+						<input type="file" id="img" name="image" accept="image/*" required="">
+						<!--accept attribute restricts the input type to the given type-->
+			</table>
+			<br>
+			<input type="submit" value="sumbit">
+			<input type="reset" value="reset">
+		</fieldset>
+	</form>
+
+	<script>												//Actual validation part
+		function validation() {
+			console.log("Validation begins!");
+
+			var fn = document.getElementById('fn').value;	//Grab the values by their unique id and store it
+			var ln = document.getElementById('ln').value;
+			var email = document.getElementById('Email').value;
+			var mob = document.getElementById('mno').value;
+			var grn = document.getElementById('GRN').value;
+
+			//Regex explanation: 
+			//1) https://youtu.be/3IhQF4-HQdo  
+			//2) https://youtu.be/4qnhPqdPpSo
+			//3) https://youtu.be/Fapp4FH2llM
+			var fncheck = /^[A-Z]{2,}$/;					//write specific regex for validation and store it
+			var lncheck = /^[A-Z]{2,}$/;
+			var emailcheck = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+			var mobcheck = /^[0-9]{10}$/;
+			var grncheck = /^[0-9]{10}$/;
+
+			
+			//Actual error returning part of code
+			if (fncheck.test(fn)) {
+				document.getElementById('ufn').innerHTML = "";
+			}
+			else {
+				document.getElementById('ufn').innerHTML = "** Invalid First name **";
+				return false;
+			}
+
+			if (lncheck.test(ln)) {
+				document.getElementById('uln').innerHTML = "";
+			}
+			else {
+				document.getElementById('uln').innerHTML = "** Invalid Last name **";
+				return false;
+			}
+
+			if (emailcheck.test(email)) {
+				document.getElementById('uEmail').innerHTML = "";
+			}
+			else {
+				document.getElementById('uEmail').innerHTML = "** Invalid Email **";
+				return false;
+			}
+
+			if (mobcheck.test(mob)) {
+				document.getElementById('umno').innerHTML = "";
+			}
+			else {
+				document.getElementById('umno').innerHTML = "** Invalid Mobile Number **";
+				return false;
+			}
+
+			if (grncheck.test(grn)) {
+				document.getElementById('uGRN').innerHTML = "";
+			}
+			else {
+				document.getElementById('uGRN').innerHTML = "** Invalid GRN **";
+				return false;
+			}
+
+			alert("Form submitted succesfully!");
+
+		}
+	</script>
+
+</body>
+
+</html>
+
+<!--Important Note: As we are using PHP, in order to get success msg after form submittion please run this script on XAMPP-->
+<!--How to install and use XAMPP: https://youtu.be/at19OmH2Bg4 -->
