@@ -1,0 +1,741 @@
+<!--Code done by: Abhijit Lalasaheb Zende-->
+<!--If you like my work then please give us a star on GitHub -->
+<!--For complete explanation visit my GitHub profile-->
+<!--GitHub code link: -->
+
+<!--Exp.6: Upload various types of file from client side to server with validation-->
+<!--
+    Problem Statement: Read resume data from user by using form and display in the resume format 
+    after clicking submit button by collecting all form data including photo 
+    and resume .pdf file create hyperlink in resume.
+-->
+
+<!--
+    Before uploading file on browser using XAMPP 
+    check if file_uploads=On in php.ini file in 
+    C:\xampp\php\php.ini
+-->
+<!DOCTYPE html> <!-- Basics of HTML: https://www.w3schools.com/html/html_basic.asp-->
+<html lang="en">
+<html>
+
+<head>
+
+    <meta charset="UTF-8"> <!--https://www.w3schools.com/tags/tag_meta.asp-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0"> <!--To make page dynamic-->
+
+    <meta name="description" content="Website for student registration form">
+    <meta name="keywords" content="html, from, student registration form">
+    <meta name="robots" content="INDEX, FOLLOW">
+
+    <title>Input form</title>
+
+    <style>
+        /* Internal or Embedded CSS */
+        span.invaliderror
+
+        /*To color the error to red*/
+            {
+            /* . operator is used for class selector */
+            /* # operator is used for id selector */
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validation()" target="_self"
+        action="ROutput.php">
+        <!-- method = "post" enctype = "multipart/form-data" is used when uploading file on browser over internet-->
+        <!-- This makes flow of uploading data efficient-->
+        <fieldset> <!--Designing simple form: https://youtu.be/QnK9QWkDiF8-->
+            <legend style="font-size:2vw;"><b>Details input form</b></legend>
+            <table width="900px" cellspacing="5"> <!--Table tag: https://youtu.be/8dE4hXi5etE-->
+                <tr>
+                    <td>
+                        <label for="fn">First name:* </label>
+                    </td>
+                    <td>
+                        <input type="text" id="fn" name="fn" required="" placeholder="eg. Abhijit" maxlength="20"
+                            autofocus>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="ufn" class="invaliderror"></span> <!--id: To show error class: in red color-->
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <label for="ln">Middle name:* </label>
+                    </td>
+                    <td>
+                        <input type="text" id="mn" name="mn" required="" placeholder="eg. Lalasaheb" maxlength="20">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="umn" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="ln">Last name:* </label>
+                    </td>
+                    <td>
+                        <input type="text" id="ln" name="ln" required="" placeholder="eg. Zende" maxlength="20">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="uln" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="Email">Email:* </label>
+                    </td>
+                    <td>
+                        <input type="email" id="Email" name="em" required="" placeholder="eg. abhijitzende75@gmail.com"
+                            maxlength="100">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="uEmail" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="mno">Mobile no:* </label>
+                    </td>
+                    <td>
+                        <input type="number" id="mno" name="mno" required="" placeholder="Enter your mobile number"
+                            step="1" maxlength="10">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="umno" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="lan">Languages known:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="member" name="member" value="" min="1" max="5">
+                        <a href="#" id="filllan" onclick="addFields()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="ulan" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="hob">Hobbies:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="hob" name="hob" value="" min="1" max="3">
+                        <a href="#" id="fillhob" onclick="addFields1()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <span id="uhob" class="invaliderror"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pl">Programming Languages:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="pl" name="pl" value="" min="1" max="10">
+                        <a href="#" id="fillpl" onclick="addFields2()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="tec">Technologies:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="tec" name="tec" value="" min="1" max="3">
+                        <a href="#" id="filltec" onclick="addFields3()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container3" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="role">Role:*</label>
+                    </td>
+                    <td>
+                        <input type="text" name="role" id="role" placeholder="eg. Web Developer" required="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="edu">Education:*</label>
+                    </td>
+                    <td>
+                        <label for="he">College/University name:</label>
+                        <input type="text" id="he" name="ugc" placeholder="eg. Shivaji University" required="">
+                        <br>
+                        <label for="phe">Passing year:</label>
+                        <br>
+                        <input type="number" name="phe" id="phe" min="1990" max="2023">
+                        <br>
+                        <label for="pphe">Percentage:</label>
+                        <br>
+                        <input type="number" name="pphe" id="pphe" min="0.00" max="100.00" step="0.01">
+                        <br>
+                        <span id="uhe" class="invaliderror"></span>
+                    </td>
+                    <td>
+                        <label for="she">XII College name:</label>
+                        <input type="text" id="she" name="hsc" placeholder="eg. YCWM" required="">
+                        <br>
+                        <label for="pshe">Passing year:</label>
+                        <br>
+                        <input type="number" name="pshe" id="pshe" min="1990" max="2019">
+                        <br>
+                        <label for="ppshe">Percentage:</label>
+                        <br>
+                        <input type="number" name="ppshe" id="ppshe" min="0.00" max="100.00" step="0.01">
+                        <br>
+                        <span id="uhe" class="invaliderror"></span>
+                    </td>
+                    <td>
+                        <label for="the">X School name:</label>
+                        <input type="text" id="the" name="ssc" placeholder="eg. YIEA" required="">
+                        <br>
+                        <label for="pthe">Passing year:</label>
+                        <br>
+                        <input type="number" name="pthe" id="pthe" min="1990" max="2017">
+                        <br>
+                        <label for="ppthe">Percentage:</label>
+                        <br>
+                        <input type="number" name="ppthe" id="ppthe" min="0.00" max="100.00" step="0.01">
+                        <br>
+                        <span id="uhe" class="invaliderror"></span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pro">Projects:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="pro" name="pro" value="" min="1" max="6">
+                        <a href="#" id="fillpro" onclick="addFields4(), addFields5()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container4" />
+                    </td>
+                    <td>
+                        <div id="container5" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="cc">Co-Cirricular:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="cc" name="cc" value="" min="1" max="3">
+                        <a href="#" id="fillcc" onclick="addFields6(), addFields7()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container6" />
+                    </td>
+                    <td>
+                        <div id="container7" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="ec">Extra-Cirricular:*</label>
+                    </td>
+                    <td>
+                        <input type="number" id="ec" name="ec" value="" min="1" max="3">
+                        <a href="#" id="fillec" onclick="addFields8(), addFields9()">Fill Details</a>
+                    </td>
+                    <td>
+                        <div id="container8" />
+                    </td>
+                    <td>
+                        <div id="container9" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="img">Identity photo* </label>
+                    </td>
+                    <td>
+                        <input type="file" id="img" name="image" accept="image/*" required="">
+                        <!--accept attribute restricts the input type to the given type-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pdf">Upload your CV:*</label>
+                    </td>
+                    <td>
+                        <input name="cv" type="file" accept="application/pdf" required="">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="sumbit">
+            <input type="reset" value="reset">
+        </fieldset>
+    </form>
+
+    <script>												//Actual validation part
+        function validation() {
+            console.log("Validation begins!");
+
+            var fn = document.getElementById('fn').value;	//Grab the values by their unique id and store it
+            var mn = document.getElementById('mn').value;
+            var ln = document.getElementById('ln').value;
+            var email = document.getElementById('Email').value;
+            var mob = document.getElementById('mno').value;
+            var lan = document.getElementById('member').value;
+            var hob = document.getElementById('hob').value;
+
+            //Regex explanation: 
+            //1) https://youtu.be/3IhQF4-HQdo  
+            //2) https://youtu.be/4qnhPqdPpSo
+            //3) https://youtu.be/Fapp4FH2llM
+            var fncheck = /^[A-Za-z]{2,}$/;					//write specific regex for validation and store it
+            var mncheck = /^[A-Za-z]{2,}$/;
+            var lncheck = /^[A-Za-z]{2,}$/;
+            var emailcheck = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+            var mobcheck = /^[0-9]{10}$/;
+            var lancheck = /^[A-Za-z]{2,}&/;
+            var hobcheck = /^[A-Za-z]{2,}&/;
+
+            //Actual error returning part of code
+            if (fncheck.test(fn)) {
+                document.getElementById('ufn').innerHTML = "";
+            }
+            else {
+                document.getElementById('ufn').innerHTML = "** Invalid First name **";
+                return false;
+            }
+
+            if (mncheck.test(mn)) {
+                document.getElementById('umn').innerHTML = "";
+            }
+            else {
+                document.getElementById('umn').innerHTML = "** Invalid Middle name **";
+                return false;
+            }
+
+            if (lncheck.test(ln)) {
+                document.getElementById('uln').innerHTML = "";
+            }
+            else {
+                document.getElementById('uln').innerHTML = "** Invalid Last name **";
+                return false;
+            }
+
+            if (emailcheck.test(email)) {
+                document.getElementById('uEmail').innerHTML = "";
+            }
+            else {
+                document.getElementById('uEmail').innerHTML = "** Invalid Email **";
+                return false;
+            }
+
+            if (mobcheck.test(mob)) {
+                document.getElementById('umno').innerHTML = "";
+            }
+            else {
+                document.getElementById('umno').innerHTML = "** Invalid Mobile Number **";
+                return false;
+            }
+
+            if (grncheck.test(grn)) {
+                document.getElementById('uGRN').innerHTML = "";
+            }
+            else {
+                document.getElementById('uGRN').innerHTML = "** Invalid GRN **";
+                return false;
+            }
+
+            if (lancheck.test(lan)) {
+                document.getElementById('ulan').innerHTML = "";
+            }
+            else {
+                document.getElementById('ulan').innerHTML = "** Invalid Language name **";
+                return false;
+            }
+
+            if (hobcheck.test(hob)) {
+                document.getElementById('uhob').innerHTML = "";
+            }
+            else {
+                document.getElementById('uhob').innerHTML = "** Invalid Hobbie name **";
+                return false;
+            }
+
+            alert("Form submitted succesfully!");
+        }
+
+        function addFields()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("member").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container0");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Language " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "lang" + i;
+                input.placeholder = "eg. English"
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+
+        function addFields1()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("hob").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container1");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Hobbie " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "hob" + i;
+                input.placeholder = "eg. Cricket"
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+
+        function addFields2()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("pl").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container2");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Programming Language " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "pl" + i;
+                input.placeholder = "eg. Python"
+                container.appendChild(document.createElement("br"));
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+
+        function addFields3()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("tec").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container3");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Technology " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "tc" + i;
+                input.placeholder = "eg. Android Studio"
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+
+        function addFields4()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("pro").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container4");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Project Title " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "prot" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+
+        function addFields5()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("pro").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container5");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Description: " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "prod" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+
+        function addFields6()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("cc").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container6");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Title " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "cct" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+
+        function addFields7()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("cc").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container7");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Description: " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "ccd" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+
+        function addFields8()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("ec").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container8");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Title " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "ect" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+
+        function addFields9()
+        {
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("ec").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container9");
+            // Remove every children it had before
+            while (container.hasChildNodes()) 
+            {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++)
+            {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Description: " + (i+1)+": "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "ecd" + i;
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+
+            }
+        }
+        
+    </script>
+
+</body>
+
+</html>
+
+<!--Important Note: As we are using PHP, in order to get success msg after form submittion please run this script on XAMPP-->
+<!--How to install and use XAMPP: https://youtu.be/at19OmH2Bg4 -->
