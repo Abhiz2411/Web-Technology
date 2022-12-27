@@ -1,0 +1,250 @@
+<!--Code done by: Abhijit Lalasaheb Zende-->
+<!--If you like my work then please give us a star on GitHub -->
+<!--For complete explanation visit my GitHub profile-->
+<!--GitHub code link:  -->
+
+<!--Exp.6: Write a program to create and handle a session in PHP -->
+<!--
+    Problem Statement: Write web application to manage session which includes registration page, login page, and home page. 
+	In home page add, subtract multiply and division buttons which will do those operations and logout button. 
+	After clicking logout it should go to login and not to allow to go back to home page.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Registration</title>
+    
+    <style>
+		/* Internal or Embedded CSS */
+		span.invaliderror			/*To color the error to red*/
+		{
+			/* . operator is used for class selector */
+			/* # operator is used for id selector */
+			color: red;
+		}
+	</style>
+</head>
+<body>
+    <fieldset>
+        <legend><b>Registration Form</b></legend>
+        <form action="Login.php" method="post" onsubmit="return validation()">
+            <table width="900px" cellspacing="5">		<!--Table tag: https://youtu.be/8dE4hXi5etE-->
+				<tr>
+					<td>
+						<label for="fn">First name:* </label>
+					</td>
+					<td>
+						<input type="text" id="fn" name="fn" required="" placeholder="Enter your name"
+							maxlength="20" autofocus>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="ufn" class="invaliderror"></span>  <!--id: To show error class: in red color-->
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label for="mn">Middle name:* </label>
+					</td>
+					<td>
+						<input type="text" id="mn" name="mn" required="" placeholder="Enter your name"
+							maxlength="20">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="umn" class="invaliderror"></span>
+					</td>
+				</tr>
+
+                <tr>
+					<td>
+						<label for="ln">Last name:* </label>
+					</td>
+					<td>
+						<input type="text" id="ln" name="ln" required="" placeholder="Enter your name"
+							maxlength="20">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uln" class="invaliderror"></span>
+					</td>
+				</tr>
+
+                <tr>
+					<td>
+						<label for="Email">Email:* </label>
+					</td>
+					<td>
+						<input type="email" id="Email" name="em" required="" placeholder="Enter your primary email id"
+							maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uEmail" class="invaliderror"></span>
+					</td>
+				</tr>
+
+                <tr>
+					<td>
+						<label for="mno">Mobile no:* </label>
+					</td>
+					<td>
+						<input type="number" id="mno" name="mno" required="" placeholder="Enter your mobile number"
+							step="1" maxlength="10">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="umno" class="invaliderror"></span>
+					</td>
+				</tr>
+
+                <tr>
+                    <td>
+                        <label for="usn">Username:*</label>
+                    </td>
+                    <td>
+                        <input type="text" name="usn" id="usn" placeholder="Enter username" required="">
+                    </td>
+                </tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="uusn" class="invaliderror"></span>
+					</td>
+				</tr>
+
+                <tr>
+                    <td>
+                        <label for="pass">Password:*</label>
+                    </td>
+                    <td>
+                        <input type="password" name="pass" id="pass" placeholder="Enter password" required="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="rpass">Confirm password:*</label>
+                    </td>
+                    <td>
+                        <input type="password" name="rpass" id="rpass" placeholder="Re-Enter password" required="">
+                    </td>
+                </tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<span id="urpass" class="invaliderror"></span>
+					</td>
+				</tr>
+                <tr>
+					<td>
+						<input type="submit" value="Register" name="submit">
+                		<input type="reset" value="reset">
+					</td>
+				</tr>
+        </form>
+    </fieldset>
+
+	<script>
+		function validation()
+		{
+			console.log("Validation begins!");
+			var fn = document.getElementById('fn').value;	//Grab the values by their unique id and store it
+			var mn = document.getElementById('mn').value;
+			var ln = document.getElementById('ln').value;
+			var email = document.getElementById('Email').value;
+			var mob = document.getElementById('mno').value;
+			var usn = document.getElementById('usn').value;
+			var pass = document.getElementById('pass').value;
+			var rpass = document.getElementById('rpass').value;
+
+			var fncheck = /^[A-Za-z]{2,}$/;					//write specific regex for validation and store it
+			var mncheck = /^[A-Za-z]{2,}$/;					
+			var lncheck = /^[A-Za-z]{2,}$/;
+			var emailcheck = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+			var mobcheck = /^[0-9]{10}$/;
+			
+			if (fncheck.test(fn)) {
+				document.getElementById('ufn').innerHTML = "";
+			}
+			else {
+				document.getElementById('ufn').innerHTML = "** Invalid First name **";
+				return false;
+			}
+
+			if (mncheck.test(mn)) {
+				document.getElementById('umn').innerHTML = "";
+			}
+			else {
+				document.getElementById('umn').innerHTML = "** Invalid Middle name **";
+				return false;
+			}
+
+			if (lncheck.test(ln)) {
+				document.getElementById('uln').innerHTML = "";
+			}
+			else {
+				document.getElementById('uln').innerHTML = "** Invalid Last name **";
+				return false;
+			}
+
+			if (emailcheck.test(email)) {
+				document.getElementById('uEmail').innerHTML = "";
+			}
+			else {
+				document.getElementById('uEmail').innerHTML = "** Invalid Email **";
+				return false;
+			}
+
+			if (mobcheck.test(mob)) {
+				document.getElementById('umno').innerHTML = "";
+			}
+			else {
+				document.getElementById('umno').innerHTML = "** Invalid Mobile Number **";
+				return false;
+			}
+			if(usn.length>=3)
+			{
+				document.getElementById('uusn').innerHTML = "";
+			}
+			else
+			{
+				document.getElementById('uusn').innerHTML = "** Invalid Username **";
+				return false;
+			}
+			if(pass==rpass)
+			{
+				document.getElementById('urpass').innerHTML = "";
+			}
+			else
+			{
+				document.getElementById('urpass').innerHTML = "** Password does not match **";
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
